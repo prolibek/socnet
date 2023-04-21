@@ -1,0 +1,9 @@
+{% block content %}
+<div>
+    {% if user.is_authenticated %}
+        <h2>Welcome, {{ user.get_username }}</h2>
+    {% else %}
+        <h2>Welcome to the home page, bitch.</h2>
+    {% endif %}
+</div>
+{% endblock content %}
