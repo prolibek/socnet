@@ -9,12 +9,12 @@
     <header>
         {% if user.is_authenticated %}
         <ul>
-            <li><a></a></li>
+            <li><a href={% url 'accounts:home' %}>Home</a></li>
             <li><a href={% url 'accounts:profile' user.get_slug %}>Profile</a></li>
         </ul>
         {% else %}
         <ul>
-            <li><a></a></li>
+            <li><a href={% url 'accounts:home' %}>Home</a></li>
             <li><a href={% url 'accounts:login' %}>Login</a></li>
         </ul>
         {% endif %}

@@ -35,7 +35,7 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=16, unique=True) # my_name_is_bryan
     bio = models.TextField(blank = True)
-    avatar = models.ImageField(upload_to="images/avatars", blank=True)
+    avatar = models.ImageField(upload_to="avatars/", blank=True)
     rating = models.IntegerField(default=0)
     date_joined = models.DateTimeField(auto_now_add=True)
     custom_url = models.CharField(max_length=16, blank=True, null=True, unique=True)

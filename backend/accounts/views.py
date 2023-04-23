@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.generic import DetailView
 
 from .models import Profile
-from .forms import UserLoginForm, UserRegistrationForm
+from .forms import UserLoginForm, UserRegistrationForm, ProfileEditForm
 
 
 def profile_view(request, custom_url=None):
@@ -13,6 +13,22 @@ def profile_view(request, custom_url=None):
         profile = Profile.objects.get(id = int(custom_url))
 
     return render(request, 'accounts/profile.html', { 'profile': profile })
+
+def profile_edit_view(request, custom_url=None):
+    try:
+        user = Profile.objects.get(custom_url = custom_url)
+    except:
+        user = Profile.objects.get(id = int(custom_url))
+
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect(f"users/{user.get_slug()}")
+    else:
+        form = ProfileEditForm()
+
+    return render(request, 'accounts/profile-edit.html', {'form': form })
 
 def home_view(request):
     return render(request, 'accounts/home.html')

@@ -8,7 +8,10 @@
     <h3>@{{ profile.get_slug }}</h3>
     <p>Rating: {{ profile.rating }}<p>
     {% if profile.bio %}
-    <p> {{ profile.bio }} </p>
+    <p> {{ profile.bio }}</p>
+    {% endif %}
+    {% if  user.id == profile.id %}
+    <p><a href={% url 'accounts:profile-edit' profile.id %}>Edit</a></p>
     {% endif %}
 </div>
 
