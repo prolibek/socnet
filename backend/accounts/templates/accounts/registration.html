@@ -3,5 +3,6 @@
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="btn btn-primary">Register</button>
+    <p>Already have an account? <a href={% url 'accounts:login' %}>Then login, bitch</a></p>
 </form>
 {% endblock content %}

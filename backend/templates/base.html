@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header>
+        {% if user.is_authenticated %}
+        <ul>
+            <li><a></a></li>
+            <li><a href={% url 'accounts:profile' user.get_slug %}>Profile</a></li>
+        </ul>
+        {% else %}
+        <ul>
+            <li><a></a></li>
+            <li><a href={% url 'accounts:login' %}>Login</a></li>
+        </ul>
+        {% endif %}
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+    </footer>
+
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

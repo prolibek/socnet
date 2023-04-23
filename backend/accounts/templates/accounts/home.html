@@ -1,9 +1,13 @@
+{% extends 'base.html' %}
+
 {% block content %}
 <div>
     {% if user.is_authenticated %}
         <h2>Welcome, {{ user.get_username }}</h2>
+        <p>Wanna, <a href={% url 'accounts:logout' %}>logout?</a></p>
     {% else %}
         <h2>Welcome to the home page, bitch.</h2>
+        <p>Wanna, <a href={% url 'accounts:register' %}>signup?</a></p>
     {% endif %}
 </div>
 {% endblock content %}

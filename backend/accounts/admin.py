@@ -13,7 +13,7 @@ class UserAdminConfig(UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'username', 'password')}), 
         ('Permissions', {'fields': ('is_active', 'is_staff')}), 
-        ('Info', {'fields': ('bio', 'rating', 'avatar')}),
+        ('Info', {'fields': ('bio', 'rating', 'avatar', 'custom_url')}),
     )
 
     add_fieldsets = (

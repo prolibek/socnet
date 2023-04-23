@@ -30,13 +30,15 @@ class ProfileManager(BaseUserManager):
         return user
 
 class Profile(AbstractBaseUser, PermissionsMixin):
-
+    id = models.AutoField(primary_key = True)
+    
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=16, unique=True) # my_name_is_bryan
     bio = models.TextField(blank = True)
     avatar = models.ImageField(upload_to="images/avatars", blank=True)
     rating = models.IntegerField(default=0)
     date_joined = models.DateTimeField(auto_now_add=True)
+    custom_url = models.CharField(max_length=16, blank=True, null=True, unique=True)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -53,6 +55,18 @@ class Profile(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username or self.email.split('@')[0]
+    
+    def get_absolute_url(self):
+        if self.custom_url:
+            return f"users/{self.custom_url}/"
+        else:
+            return f"users/{self.id}/"
+    
+    def get_slug(self):
+        if self.custom_url:
+            return self.custom_url
+        else:
+            return self.id
     
     def get_username(self):
         return self.username

@@ -1,7 +1,18 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import authenticate, login, logout
+from django.views.generic import DetailView
 
+from .models import Profile
 from .forms import UserLoginForm, UserRegistrationForm
+
+
+def profile_view(request, custom_url=None):
+    try:
+        profile = Profile.objects.get(custom_url = custom_url)
+    except:
+        profile = Profile.objects.get(id = int(custom_url))
+
+    return render(request, 'accounts/profile.html', { 'profile': profile })
 
 def home_view(request):
     return render(request, 'accounts/home.html')
@@ -22,6 +33,10 @@ def login_view(request):
     else:
         form = UserLoginForm()
     return render(request, 'accounts/login.html', { 'form': form })
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')
 
 def register_view(request):
     if request.method == "POST":
