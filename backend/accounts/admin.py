@@ -5,10 +5,10 @@ from . import models
 
 class UserAdminConfig(UserAdmin):
     
-    search_fields = ('email', 'username', )
-    list_filter = ('email', 'username', 'is_active', 'is_staff')
+    search_fields = ('email', 'username' )
+    list_filter = ('id', 'email', 'username', 'is_active', 'is_staff')
     ordering = ('-date_joined', )
-    list_display = ('email', 'username',
+    list_display = ('id', 'email', 'username',
                     'is_active', 'is_staff')
     fieldsets = (
         (None, {'fields': ('email', 'username', 'password')}), 

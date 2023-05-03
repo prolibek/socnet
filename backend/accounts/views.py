@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import DetailView
+from django.contrib.auth.decorators import login_required
 
 from .models import Profile
 from .forms import UserLoginForm, UserRegistrationForm, ProfileEditForm
@@ -14,17 +15,13 @@ def profile_view(request, custom_url=None):
 
     return render(request, 'accounts/profile.html', { 'profile': profile })
 
-def profile_edit_view(request, custom_url=None):
-    try:
-        user = Profile.objects.get(custom_url = custom_url)
-    except:
-        user = Profile.objects.get(id = int(custom_url))
-
+@login_required
+def profile_edit_view(request):
     if request.method == 'POST':
-        form = ProfileEditForm(request.POST, request.FILES, instance=user)
+        form = ProfileEditForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect(f"users/{user.get_slug()}")
+            return redirect(f"/")
     else:
         form = ProfileEditForm()
 

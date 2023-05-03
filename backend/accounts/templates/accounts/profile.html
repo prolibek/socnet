@@ -11,7 +11,7 @@
     <p> {{ profile.bio }}</p>
     {% endif %}
     {% if  user.id == profile.id %}
-    <p><a href={% url 'accounts:profile-edit' profile.id %}>Edit</a></p>
+    <p><a href={% url 'accounts:profile-edit' %}>Edit</a></p>
     {% endif %}
 </div>
 
