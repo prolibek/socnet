@@ -12,7 +12,11 @@
     {% endif %}
     {% if  user.id == profile.id %}
     <p><a href={% url 'accounts:profile-edit' %}>Edit</a></p>
+    <p><a href={% url 'accounts:post-create' %}>Create post<a></p>
     {% endif %}
+    {% for post in posts %}
+        <p>{{ post.text }}</p>
+    {% endfor %}
 </div>
 
 {% endblock content %}

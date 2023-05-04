@@ -70,3 +70,10 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     
     def get_username(self):
         return self.username
+
+class Post(models.Model):
+    text = models.TextField()
+    owner = models.ForeignKey(Profile, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.text[:50]

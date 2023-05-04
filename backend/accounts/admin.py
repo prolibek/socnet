@@ -24,3 +24,4 @@ class UserAdminConfig(UserAdmin):
     )
 
 admin.site.register(models.Profile, UserAdminConfig)
+admin.site.register(models.Post)
