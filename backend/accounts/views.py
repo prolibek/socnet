@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
 
-from .models import Profile, Post
-from .forms import UserLoginForm, UserRegistrationForm, ProfileEditForm, PostCreateForm
+from .models import Profile, Post, Comment
+from .forms import UserLoginForm, UserRegistrationForm, ProfileEditForm, PostCreateForm, CommentCreateForm
 
 
 def profile_view(request, custom_url=None):
@@ -15,7 +15,7 @@ def profile_view(request, custom_url=None):
     try:
         posts = Post.objects.filter(owner = profile)
     except:
-        posts = None
+        posts = None 
 
     context = {
         'profile': profile,
@@ -23,6 +23,24 @@ def profile_view(request, custom_url=None):
     }
 
     return render(request, 'accounts/profile.html', context)
+
+def profile_detail_view(request, pk=None):
+    post = Post.objects.get(id = pk)
+
+    if request.method == "POST": 
+        form = CommentCreateForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.owner = request.user 
+            comment.post = post
+            comment.save()
+    else: 
+        form = CommentCreateForm()
+    context = {
+        'post': post,
+        'form': form
+    }
+    return render(request, "accounts/post-detail.html", context)
 
 @login_required
 def profile_edit_view(request):

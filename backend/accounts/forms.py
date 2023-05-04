@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from .models import Post
+from .models import Post, Comment
 
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(label="Username")
@@ -20,4 +20,9 @@ class ProfileEditForm(UserChangeForm):
 class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Post 
+        fields = ('text', )
+
+class CommentCreateForm(forms.ModelForm):
+    class Meta: 
+        model = Comment 
         fields = ('text', )

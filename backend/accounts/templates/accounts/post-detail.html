@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    <h4>{{ post.owner.username }}</h>
+    <p>{{ post.text }}</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Post</button>
+    </form>
+    <ul>
+    {% for comment in post.get_comments %}
+        <li>
+            <h4>{{ comment.owner.username }}</h4>
+            <p>{{ comment.text }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock content %}

@@ -12,5 +12,6 @@ urlpatterns = [
     path('register/', views.register_view, name='register'),
     path('users/edit/', views.profile_edit_view, name='profile-edit'),
     path('create-post/', views.post_create_view, name='post-create'),
+    path('post/<int:pk>', views.profile_detail_view, name='profile-detail'),
     path('users/<str:custom_url>/', views.profile_view, name='profile'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

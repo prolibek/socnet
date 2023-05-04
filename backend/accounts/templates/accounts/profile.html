@@ -15,7 +15,15 @@
     <p><a href={% url 'accounts:post-create' %}>Create post<a></p>
     {% endif %}
     {% for post in posts %}
-        <p>{{ post.text }}</p>
+        <a href={% url 'accounts:profile-detail' post.id %}>{{ post.text }}</a>
+        <ul>
+        {% for comment in post.get_comments %}
+            <li>
+                <h4>{{comment.owner.username}}</h4>
+                <p>{{comment.text}}</p>
+            </li>
+        {% endfor %}
+        </ul>
     {% endfor %}
 </div>
 

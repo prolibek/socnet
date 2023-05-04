@@ -71,12 +71,19 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     def get_username(self):
         return self.username
 
+class Comment:
+    pass
+
 class Post(models.Model):
+    id = models.AutoField(primary_key = True)
     text = models.TextField()
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.text[:50]
+
+    def get_comments(self):
+        return Comment.objects.filter(post = self)
 
 class Comment(models.Model):
     text = models.TextField()
