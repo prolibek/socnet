@@ -73,7 +73,15 @@ class Profile(AbstractBaseUser, PermissionsMixin):
 
 class Post(models.Model):
     text = models.TextField()
-    owner = models.ForeignKey(Profile, on_delete=models.DO_NOTHING)
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.text[:50]
+
+class Comment(models.Model):
+    text = models.TextField()
+    owner = models.ForeignKey(Profile, on_delete=models.DO_NOTHING)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.text[:50] 

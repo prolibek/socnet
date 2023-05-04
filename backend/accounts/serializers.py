@@ -6,3 +6,6 @@ class ProfileLoginSerializer(serializers.Serializer):
 
 class ProfileRegisterSerializer(serializers.Serializer):
     pass
+
+class PostListSerializer(serializers.Serializer):
+    pass
